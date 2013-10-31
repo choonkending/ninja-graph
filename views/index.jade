@@ -1,0 +1,52 @@
+!!! 5
+html
+  head
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    script(src='http://d3js.org/d3.v3.min.js', charset='utf-8')
+    link(rel='stylesheet', href='http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/style.css', media='screen', type='text/css')
+  body
+    .container
+      form(role='form')
+        .row
+          .col-lg-5.col-lg-offset-2
+            .form-group
+              h1
+                span.glyphicon.glyphicon-tower
+                | Map your ideas&excl;
+              label.col-lg-4(for='nodeParent') Parent Idea
+              .col-lg-8
+                select#nodeParent.form-control
+                  option No Parent
+                span.help-block Start with your root idea&excl; Warning&colon; Insanity may ensue if you don&apos;t&excl;
+              // /.col-lg-8
+            // /.form-group
+            .form-group
+              label.col-lg-4(for='nodeEntry') Idea
+              .col-lg-8
+                input#nodeEntry.form-control(type='text', placeholder='Begin world domination')
+              // /.col-lg-8
+            // /.form-group
+            label.col-lg-4(for='nodeDesc') Description
+            .col-lg-8
+              textarea#nodeDesc.form-control(row='3', placeholder='Description of world domination')
+            // /.col-lg-8
+            .col-lg-offset-4.col-lg-8
+              button#nodeBtn.btn.btn-success.btn-lg.col-lg-4(type='button')
+                span.glyphicon.glyphicon-globe
+                | Go&excl;
+              button#shareBtn.btn.btn-primary.btn-lg.col-lg-offset-3.col-lg-5(type='button')
+                span.glyphicon.glyphicon-share
+                | Share
+            // /.form-group
+          // /.col-lg-5
+          .col-lg-5
+            #ideaDisplay
+            #descDisplay
+        // /.row
+    // /.container
+    // Including jQuery and bootstrap libraries
+    script(src='http://code.jquery.com/jquery-1.10.1.min.js')
+    script(src='http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
+    script(src='js/json2.js')
+    script(src='js/index.js')
