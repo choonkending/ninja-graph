@@ -25,8 +25,8 @@ var NodeSchema = new Schema({
 
 
 var LinkSchema = new Schema({
-    	source: Object,
-	target: Object
+    	source: Number,
+	target: Number
 });
 
 
