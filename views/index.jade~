@@ -32,12 +32,12 @@ html
               textarea#nodeDesc.form-control(row='3', placeholder='Description of world domination')
             // /.col-lg-8
             .col-lg-offset-4.col-lg-8
-              button#nodeBtn.btn.btn-success.btn-lg.col-lg-3(type='button')
+              button#nodeBtn.btn.btn-success.btn-lg.col-lg-4(type='button')
                 span.glyphicon.glyphicon-globe
                 | Go&excl;
-              button#searchBtn.btn.btn-success.btn-lg.col-lg-3(type='button')
+	      button#searchBtn.btn.btn-success.btn-lg.col-lg-2(type='button')
                 span.glyphicon.glyphicon-globe
-                | S&excl;
+                | Get&excl;
               button#shareBtn.btn.btn-primary.btn-lg.col-lg-offset-3.col-lg-3(type='button')
                 span.glyphicon.glyphicon-share
                 | Share

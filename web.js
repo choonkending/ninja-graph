@@ -20,32 +20,16 @@ var Schema = mongoose.Schema;
 
 var NodeSchema = new Schema({
 	node: String,
-	desc: String,
-    	index: Number,
-   	weight: Number,
-    	x: Number,
-    	y: Number,
-    	px: Number,
-    	py: Number,
-    	fixed: Number
+	desc: String
 });
 
 
 var LinkSchema = new Schema({
-    	source: {
-		type: Schema.ObjectId,
-		ref: 'Node'
-	},
-	target: {
-		type: Schema.ObjectId,
-		ref: 'Node'
-	}
+    	source: Object,
+	target: Object
 });
 
-var IndexSchema = new Schema({
-	name: String,
-	index: Number
-});
+
 
 var NinjaGraphSchema = new Schema({
  	name: String,
@@ -58,7 +42,7 @@ var NinjaGraphSchema = new Schema({
 	},
 	nodes:[NodeSchema],
 	links:[LinkSchema],
-	indexes: [IndexSchema]
+	indexes: Object
 });
 
 var NinjaSchema = new Schema({
@@ -72,7 +56,10 @@ var NinjaSchema = new Schema({
 });
 
 
-var Node = mongoose.model('Node',NodeSchema);
+var NodeModel = mongoose.model('Node',NodeSchema);
+
+var NinjaGraphModel = mongoose.model('NinjaGraph', NinjaGraphSchema);
+
 // var NinjaModel
 var NinjaModel = mongoose.model('Ninja', NinjaSchema);
 
@@ -90,26 +77,66 @@ mongoose.connect(uristring,function(err,res){
 app.configure(function(){
         app.set('views', application_root + '/views');
         app.set('view engine', 'jade');
-	
+
+	//You must make sure that you define all configurations BEFORE defining routes
+	app.use(express.cookieParser());
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
+
 	// The order of which we use this is important
 	// This way app.router gets sent to client
 	app.use(app.router);
 	// Serve static content
 	app.use(express.static(path.join(application_root,'public')));
+	
 	//show all errors in development
         app.use(express.errorHandler({dumpExceptions:true,showStack:true}));
 });
 
+// Begin traffic! hehe
 app.get('/',function(req,res){
 	res.render('index');
 });
 
 app.post('/ninja',function(req,res){
-	var ninja;
-	console.log("POST: ");
-	console.log(req.body);
+	
+	var ninjaGraph = new NinjaGraphModel({
+		name: "Ninja",
+		author: "Choon Ken Ding",
+		visibility: 'public'
+	});
+	
+	var node = JSON.parse(req.body.nodes);
+	node.forEach(function(node){
+		ninjaGraph.nodes.push(node);
+		console.log(node);
+	});
+	var link = JSON.parse(req.body.links);
+	link.forEach(function(link){
+		ninjaGraph.links.push(link);
+	});
+	var index = JSON.parse(req.body.indexes);
+	ninjaGraph.indexes = index;
+	ninjaGraph.save(function(err){
+		console.log(err);
+		if(err) return err;
+	});
+	
 });
 
+// get a ninja graph
+app.get('/ninjaGraph',function(request,response){
+	console.log(request.query.id);
+        return NinjaGraphModel.findOne( { name : request.query.id },function(err,ninjaGraph){
+                if(!err){
+                        console.log("It's working");
+                        return response.send(JSON.stringify(ninjaGraph));
+                }else{
+                        console.log("It's not working");
+                        return console.log(err);
+                }
+        });
+});
 // Start server
 var port = process.env.PORT || 5000;
 app.listen(port, function(){
