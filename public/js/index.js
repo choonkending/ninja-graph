@@ -9,11 +9,11 @@ var ideaLinks2 = [];
 
 // D3js part 
 var width = 960;
-var height = 300;
+var height = 350;
 
 
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#canvas").append("svg")
           .attr("width", width)
           .attr("height", height);
 

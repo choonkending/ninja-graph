@@ -9,7 +9,7 @@ html
     .container
       form(role='form')
         .row
-          .col-lg-5.col-lg-offset-2
+          .col-lg-4
             .form-group
               h1
                 span.glyphicon.glyphicon-tower
@@ -32,18 +32,19 @@ html
               textarea#nodeDesc.form-control(row='3', placeholder='Description of world domination')
             // /.col-lg-8
             .col-lg-offset-4.col-lg-8
-              button#nodeBtn.btn.btn-success.btn-lg.col-lg-3(type='button')
+              button#nodeBtn.btn.btn-success.btn-lg.col-lg-5(type='button')
                 span.glyphicon.glyphicon-globe
                 | Go&excl;
-              button#searchBtn.btn.btn-success.btn-lg.col-lg-3(type='button')
-                span.glyphicon.glyphicon-globe
-                | S&excl;
-              button#shareBtn.btn.btn-primary.btn-lg.col-lg-offset-3.col-lg-3(type='button')
+              // <button class="btn btn-success btn-lg col-lg-3" type="button" id="searchBtn"><span class="glyphicon glyphicon-globe"></span> S!</button>
+              button#shareBtn.btn.btn-primary.btn-lg.col-lg-offset-2.col-lg-5(type='button')
                 span.glyphicon.glyphicon-share
                 | Share
             // /.form-group
           // /.col-lg-5
-          .col-lg-5
+          #canvas.col-lg-8
+        // /.row
+        .row
+          .col-lg-12
             #ideaDisplay
             #descDisplay
         // /.row

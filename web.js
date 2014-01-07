@@ -1,12 +1,15 @@
 // Runs the basic server functions for node.js
 var application_root = __dirname;
 var express = require('express');
-var mongoose = require('mongoose');
+
 var path = require('path');
 
 // Create server
 var app = express();
 
+/*
+// Commented so that modifications can be done later
+var mongoose = require('mongoose');
 // Connect to database
 // Here we find an appropriate database to connect to, defaulting to localhost if there is none
 var uristring = 
@@ -72,6 +75,9 @@ mongoose.connect(uristring,function(err,res){
 	}
 });
 
+// End of mongoose connect
+// Commented so that modifications can be done on it later
+*/
 
 // Configure Server
 app.configure(function(){
@@ -98,6 +104,11 @@ app.get('/',function(req,res){
 	res.render('index');
 });
 
+// Post a ninja graph
+// So far the ninja graph nodes are fixed
+/* 
+// Basic interaction with the server
+// Commented for modifications later
 app.post('/ninja',function(req,res){
 	
 	var ninjaGraph = new NinjaGraphModel({
@@ -124,7 +135,9 @@ app.post('/ninja',function(req,res){
 	
 });
 
+
 // get a ninja graph
+// Parameters -  id = Ninja (This is an example)
 app.get('/ninjaGraph',function(request,response){
 	console.log(request.query.id);
         return NinjaGraphModel.findOne( { name : request.query.id },function(err,ninjaGraph){
@@ -137,6 +150,7 @@ app.get('/ninjaGraph',function(request,response){
                 }
         });
 });
+*/
 // Start server
 var port = process.env.PORT || 5000;
 app.listen(port, function(){
